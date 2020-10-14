@@ -1,15 +1,11 @@
 <?php
 
 require 'config.php'; //importação de arquivo de configuração
+require 'dao/UsuarioDaoMysql.php';
 
-$lista = []; //array para usuarios
+$usuarioDao = new UsuarioDaoMysql($pdo); //instaciando o objeto
 
-$sql = $pdo->query("SELECT * FROM usuarios"); //buscando usuarios
-
-if($sql->rowCount() > 0) { //verificando se há usuarios no banco
-    //armazenando os usuarios no array
-    $lista = $sql->fetchAll(PDO::FETCH_ASSOC);
-}
+$lista = $usuarioDao->findAll(); //array para usuarios
 
 ?>
 
@@ -24,13 +20,13 @@ if($sql->rowCount() > 0) { //verificando se há usuarios no banco
     </tr>
     <?php foreach($lista as $usuario): ?>
         <tr>
-            <td> <?=$usuario['id'];?> </td>
-            <td> <?=$usuario['nome'];?> </td>
-            <td> <?=$usuario['email'];?> </td>
+            <td> <?=$usuario->getId();?> </td>
+            <td> <?=$usuario->getNome();?> </td>
+            <td> <?=$usuario->getEmail();?> </td>
             <td> 
-                <a href="editar.php?id=<?=$usuario['id'];?>">[ Editar ]</a>
+                <a href="editar.php?id=<?=$usuario->getId();?>">[ Editar ]</a>
                 <a 
-                    href="excluir.php?id=<?=$usuario['id'];?>" 
+                    href="excluir.php?id=<?=$usuario->getId();?>" 
                     onclick="return confirm('Tem certeza que deseja excluir?')">
                     [ Excluir ]
                 </a>
