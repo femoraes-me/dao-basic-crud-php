@@ -1,6 +1,10 @@
 <?php
 
 require 'config.php';
+require 'dao/UsuarioDaoMysql.php';
+
+$usuarioDao = new UsuarioDaoMysql($pdo); //instaciando o objeto
+
 
 $id = filter_input(INPUT_POST, 'id');
 $name = filter_input(INPUT_POST, 'name');
