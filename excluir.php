@@ -1,16 +1,14 @@
 <?php
 require 'config.php';
+require 'dao/UsuarioDaoMysql.php';
+
+$usuarioDao = new UsuarioDaoMysql($pdo); //instaciando o objeto
 
 $id = filter_input(INPUT_GET, 'id'); //recebendo id
 
 //verificando se id existe
 if($id) {
-
-    //query de excluasao
-    $sql = $pdo->prepare("DELETE FROM usuarios WHERE id = :id");
-    $sql->bindValue(':id', $id);
-    $sql->execute();
-    
+    $usuarioDao->delete($id); 
 }
 
 //atualizando a home page
