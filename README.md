@@ -1,5 +1,5 @@
 <h1 align="center">
-  Basic CRUD PDO em PHP
+  DAO Basic CRUD PDO em PHP
 </h1>
 
 ---
